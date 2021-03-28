@@ -4,7 +4,7 @@
 import * as React from 'react'
 
 function Board() {
-  // ðŸ¨ squares is the state for this component. Add useState for squares
+  // 🐨 squares is the state for this component. Add useState for squares
   //const squares = Array(9).fill(null)
   const [squares, setSquares] = React.useState(
     () => window.localStorage.getItem('squares') ? 
@@ -16,11 +16,11 @@ function Board() {
     window.localStorage.setItem('squares', JSON.stringify(squares))
   }, [squares])
 
-  // ðŸ¨ We'll need the following bits of derived state:
+  // 🐨 We'll need the following bits of derived state:
   // - nextValue ('X' or 'O')
   // - winner ('X', 'O', or null)
   // - status (`Winner: ${winner}`, `Scratch: Cat's game`, or `Next player: ${nextValue}`)
-  // ðŸ’° I've written the calculations for you! So you can use my utilities
+  // 💰 I've written the calculations for you! So you can use my utilities
   // below to create these variables
 
   const nextValue = calculateNextValue(squares)
@@ -30,30 +30,30 @@ function Board() {
   // This is the function your square click handler will call. `square` should
   // be an index. So if they click the center square, this will be `4`.
   function selectSquare(square) {
-    // ðŸ¨ first, if there's already winner or there's already a value at the
+    // 🐨 first, if there's already winner or there's already a value at the
     // given square index (like someone clicked a square that's already been
     // clicked), then return early so we don't make any state changes
-    if(winner || squares[square]) return // Sai da funÃ§Ã£o sem fazer nada
+    if(winner || squares[square]) return // Sai da função sem fazer nada
 
     //
-    // ðŸ¦‰ It's typically a bad idea to mutate or directly change state in React.
+    // 🦉 It's typically a bad idea to mutate or directly change state in React.
     // Doing so can lead to subtle bugs that can easily slip into production.
     //
-    // ðŸ¨ make a copy of the squares array
-    // ðŸ’° `[...squares]` will do it!)
+    // 🐨 make a copy of the squares array
+    // 💰 `[...squares]` will do it!)
     const squaresCopy = [...squares]
     //
-    // ðŸ¨ set the value of the square that was selected
-    // ðŸ’° `squaresCopy[square] = nextValue`
+    // 🐨 set the value of the square that was selected
+    // 💰 `squaresCopy[square] = nextValue`
     squaresCopy[square] = nextValue
     //
-    // ðŸ¨ set the squares to your copy
+    // 🐨 set the squares to your copy
     setSquares(squaresCopy)
   }
 
   function restart() {
-    // ðŸ¨ reset the squares
-    // ðŸ’° `Array(9).fill(null)` will do it!
+    // 🐨 reset the squares
+    // 💰 `Array(9).fill(null)` will do it!
     setSquares(Array(9).fill(null))
   }
 
@@ -67,8 +67,8 @@ function Board() {
 
   return (
     <div>
-      {/* ðŸ¨ put the status in the div below */}
-      <div className="status">{status}</div>
+      {/* 🐨 put the status in the div below */}
+    <div className="status">{status}</div>
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
@@ -143,5 +143,4 @@ function calculateWinner(squares) {
 function App() {
   return <Game />
 }
-
 export default App
