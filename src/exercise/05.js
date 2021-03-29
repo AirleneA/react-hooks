@@ -18,8 +18,25 @@ function Tilt({children}) {
   //   glare: true,
   //   'max-glare': 0.5,
   // })
+ 
+ // useEffect() é executado sempre após um componente ser atualizado na tela
+  React.useEffect(() => {
+      //const tiltNode= tiltRef.current
+      const tiltNode = document.getElementById('tiltRoot')
+      // Chamada à bibliotenca VanillaTilt
+      VanillaTilt.init(tiltNode, {
+          max:25,
+          speed: 1000,
+          glare: true,
+          'max-glare': 0.5
+      })
+      return () => tiltNode.vanillaTilt.destroy()
+
+  }, [])
+  
+  
   //
-  // 💰 Don't forget to return a cleanup function. VanillaTilt.init will add an
+   // 💰 Don't forget to return a cleanup function. VanillaTilt.init will add an
   // object to your DOM node to cleanup:
   // `return () => tiltNode.vanillaTilt.destroy()`
   //
@@ -28,8 +45,12 @@ function Tilt({children}) {
   // this for a more in depth explanation.
 
   // 🐨 add the `ref` prop to the `tilt-root` div here:
+  // refs possibilitam que elementos HTML sejam acessados pelo React e inclusiva
+  // repassados para outras bibliotecas
+  const tiltRef = React.useRef()
+
   return (
-    <div className="tilt-root">
+    <div className="tilt-root" id = "tiltRoot" ref={tiltRef}>
       <div className="tilt-child">{children}</div>
     </div>
   )
